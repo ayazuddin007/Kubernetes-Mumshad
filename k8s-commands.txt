@@ -1,0 +1,40 @@
+Minikube
+-------------
+minikube start --vm-driver=none
+minikube status
+minikube stop
+
+Cluster-info
+--------------
+kubectl cluster-info
+kubectl cluster-info dump
+kubectl version
+kubedm --version
+
+Pod
+----
+kubectl run <podName> --image=<imageName>
+kubectl run <podName> --image=<imageName> --dry-run -o yaml > <podName>.yaml          (to create pod yaml 
+file from commandline)
+
+kubectl get po
+kubectl get po -o wide
+kubectl describe po <podName>
+kubectl edit po <podName>
+kubectl delete po <podName>
+kubectl logs <podName>      (for latest log)
+kubectl logs -f <podName>   (for continuous log)
+kubectl apply -f <podName>.yaml
+kubectl exec -it <podName> -c <containerName> -- /bin/bash     (to enter into pod container)
+kubectl get po <podName> -o jsonpath='{.spec.containers[*].name}'   (to list all containers of a pod) 
+
+ReplicationController/ReplicaSet
+----------------------------------
+kubectl create -f <rcName>.yaml
+kubectl create -f <rsName>.yaml
+kubectl replace -f <rsName>.yaml (to update replicaset for having n no. of replica mentioned in rs yaml file)
+kubectl scale -f --replicas=<any nmber> <rsName>.yaml
+kubectl scale -f --replicas=<any nmber> replicaset <rsName>
+kubectl get rs
+kubectl delete rs <rsName>
+kubectl describe rs <rsName>
