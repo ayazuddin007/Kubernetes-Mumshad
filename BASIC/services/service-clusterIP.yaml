@@ -5,8 +5,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 80         # port on service
-      targetPort: 80   # port on Pod
+    - port: 80          # port on service
+      targetPort: 80    # port on Pod
   selector:
     app: myapp
     type: back-end
