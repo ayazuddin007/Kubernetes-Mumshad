@@ -47,9 +47,38 @@ kubectl scale -f --replicas=<any nmber> replicaset <rsName>
 kubectl get rs
 kubectl delete rs <rsName>
 kubectl describe rs <rsName>
+kubectl edit rs <rsName>
 
 Deployment
 --------------
 kubectl create -f <deploymentName>.yaml
+kubectl delete -f <deploymentName>.yaml
 kubectl get deployments
 kubectl get all (to get all list of k8s created resource)
+kubectl describe deployment <deploymentName>
+kubectl delete deployment <deploymentName>
+kubectl edit deployment <deploymentName>
+
+Deployment (Updates and Rollback)
+---------------------------------
+kubectl create -f <deploymentName> --record (to record the cause of change)
+kubectl edit deployment <deploymentName> --record 
+kubectl set image deploy <deploymentName> <imageName>=<imageName>:<Version> --record
+kubectl rollout status deploy <deploymentName>
+kubectl rollout history deploy <deploymentName>
+kubectl rollout undo deploy <deploymentName>
+kubectl rollout undo deploy <deploymentName> --to-revision=<no>
+
+Note: 
+Default strategy is RollingUpdate
+
+Service
+-----------
+kubectl create -f <serviceName>.yaml
+kubectl get svc
+kubectl delete svc <serviceName>
+kubectl describe svc <serviceName>
+kubectl edit svc <serviceName>
+
+
+
