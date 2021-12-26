@@ -75,10 +75,15 @@ Default strategy is RollingUpdate
 Service
 -----------
 kubectl create -f <serviceName>.yaml
+kubectl delete -f <serviceName>.yaml
 kubectl get svc
 kubectl delete svc <serviceName>
 kubectl describe svc <serviceName>
 kubectl edit svc <serviceName>
+
+Note: 
+Default service type  is ClusterIP
+
 
 
 
