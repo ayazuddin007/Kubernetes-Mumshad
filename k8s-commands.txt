@@ -1,3 +1,10 @@
+docker
+------------
+docker system prune -f
+docker image prune -f
+docker rm -f $(docker ps -a -q)
+docker volume rm $(docker volume ls -q)
+
 Minikube
 -------------
 minikube start --vm-driver=none
@@ -24,7 +31,8 @@ kubectl edit po <podName>
 kubectl delete po <podName>
 kubectl logs <podName>      (for latest log)
 kubectl logs -f <podName>   (for continuous log)
-kubectl apply -f <podName>.yaml
+kubectl create -f <podName>.yaml
+kubectl delete -f <podName>.yaml
 kubectl exec -it <podName> -c <containerName> -- /bin/bash     (to enter into pod container)
 kubectl get po <podName> -o jsonpath='{.spec.containers[*].name}'   (to list all containers of a pod) 
 
@@ -32,9 +40,16 @@ ReplicationController/ReplicaSet
 ----------------------------------
 kubectl create -f <rcName>.yaml
 kubectl create -f <rsName>.yaml
+kubectl delete -f <rsName>.yaml
 kubectl replace -f <rsName>.yaml (to update replicaset for having n no. of replica mentioned in rs yaml file)
 kubectl scale -f --replicas=<any nmber> <rsName>.yaml
 kubectl scale -f --replicas=<any nmber> replicaset <rsName>
 kubectl get rs
 kubectl delete rs <rsName>
 kubectl describe rs <rsName>
+
+Deployment
+--------------
+kubectl create -f <deploymentName>.yaml
+kubectl get deployments
+kubectl get all (to get all list of k8s created resource)
