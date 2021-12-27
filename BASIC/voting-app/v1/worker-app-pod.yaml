@@ -9,5 +9,3 @@ spec:
   containers:
     - name: worker-app
       image: kodekloud/examplevotingapp_worker:v1
-      ports:
-        - containerPort: 80
