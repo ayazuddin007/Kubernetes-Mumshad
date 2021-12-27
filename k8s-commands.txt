@@ -84,6 +84,8 @@ kubectl edit svc <serviceName>
 Note: 
 Default service type  is ClusterIP
 
-
-
-
+voting-app:v1
+-----------------
+kubectl apply -f <dirName>   (for creating all object at once)
+kubectl delete -f <dirName>  (for deleting all object at once)
+kubectl delete all --all     (for deleting all object at once)
