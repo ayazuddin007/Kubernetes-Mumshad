@@ -10,19 +10,19 @@ This documentation guides you in setting up a cluster with one master node and t
         
 1. Open Below ports in the Security Group. 
    #### Master node: 
-    `2379 (ETCD)
-     6443 (API Server)
-     10250 (Kubelet)
-     10251 (Scheduler)
-     10252 (Controller-Manager)
-     179 (Calico Network)
+    `2379 (ETCD),
+     6443 (API Server),
+     10250 (Kubelet),
+     10251 (Scheduler),
+     10252 (Controller-Manager),
+     179 (Calico Network),
      22 (SSH)
     `
 
    ##### On Master node and Worker node:
-    `10250 (Kubelet)
-     30000 - 32767 (Services)
-     179 (Calico Network)
+    `10250 (Kubelet),
+     30000 - 32767 (Services),
+     179 (Calico Network),
      22 (SSH)
     `  
 
@@ -131,10 +131,10 @@ This documentation guides you in setting up a cluster with one master node and t
     On Master
     ```sh
     kubectl delete node <nodeName>
-    kubectl get node
+    kubectl get nodes
     ```
 ## `To Reset cluster(i.e By resetting kubeadm):`
-    On All Nodea
+    On All Nodes
      ```sh
     kubeadm reset
     ```
