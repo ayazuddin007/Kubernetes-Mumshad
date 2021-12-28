@@ -96,7 +96,7 @@ This documentation guides you in setting up a cluster with one master node and t
 1. Create a user for kubernetes administration  and copy kube config file.   
 
     ``To be able to use kubectl command to connect and interact with the cluster, the user needs kube config file.``  
-    
+
     a) As a root user
 
     ```sh
@@ -163,14 +163,16 @@ This documentation guides you in setting up a cluster with one master node and t
     kubectl get cs
     ```
 ## `To Remove Nodes from cluster:`
+
     On Master
     ```sh
     kubectl delete node <nodeName>
     kubectl get nodes
     ```
 ## `To Reset cluster(i.e By resetting kubeadm):`
+
     On All Nodes
-     ```sh
+    ```sh
     kubeadm reset
     ```
 
