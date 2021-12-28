@@ -95,14 +95,41 @@ This documentation guides you in setting up a cluster with one master node and t
     ```
 1. Create a user for kubernetes administration  and copy kube config file.   
     ``To be able to use kubectl command to connect and interact with the cluster, the user needs kube config file.``  
-    In this case, we are creating a user called `kubeadmin`
+    a) As a root user
+    ```sh
+     mkdir -p $HOME/.kube
+     sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+     sudo chown $(id -u):$(id -g) $HOME/.kube/config
+     export KUBECONFIG=/etc/kubernetes/admin.conf
+    ```
+    > OR
+        
+    b) As a Normal user called `kubeadmin`
+    1)
     ```sh
     useradd kubeadmin 
+    passwd kubeadmin
+    (set password)
     mkdir /home/kubeadmin/.kube
     cp /etc/kubernetes/admin.conf /home/kubeadmin/.kube/config
     chown -R kubeadmin:kubeadmin /home/kubeadmin/.kube
     ```
-1. Deploy Calico network as a __kubeadmin__ user. 
+    2) add kubeadmin user in sudoers file
+    ```sh
+    vi /etc/sudoers
+		kubeadmin ALL=(ALL) NOPASSWD:ALL
+	save+quit
+    ```
+
+
+1. Deploy Calico network 
+    a) As a root user
+    ```sh
+    kubectl create -f https://docs.projectcalico.org/v3.9/manifests/calico.yaml
+    ```
+    > OR
+
+    b) As a Normal user called `kubeadmin` 
 	> This should be executed as a user (heare as a __kubeadmin__ )
     
     ```sh
