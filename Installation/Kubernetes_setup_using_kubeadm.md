@@ -163,17 +163,15 @@ This documentation guides you in setting up a cluster with one master node and t
     kubectl get cs
     ```
 ## `To Remove Nodes from cluster:`
-
-    On Master
+1.  On Master
 
     ```sh
     kubectl delete node <nodeName>
     kubectl get nodes
     ```
 ## `To Reset cluster(i.e By resetting kubeadm):`
+1.  On All Nodes
 
-    On All Nodes
-    
     ```sh
     kubeadm reset
     ```
