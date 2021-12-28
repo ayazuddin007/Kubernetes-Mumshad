@@ -19,7 +19,7 @@ This documentation guides you in setting up a cluster with one master node and t
      22 (SSH)
     `
 
-   ##### On Master node and Worker node:
+   #### On Worker node:
     `10250 (Kubelet),
      30000 - 32767 (Services),
      179 (Calico Network),
