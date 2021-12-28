@@ -7,18 +7,24 @@ This documentation guides you in setting up a cluster with one master node and t
 1. System Requirements 
     >Master: t2.medium (2 CPUs and 2GB Memory)   
     >Worker Nodes: t2.micro 
-
+        
 1. Open Below ports in the Security Group. 
    #### Master node: 
-    `6443  
-    32750  
-    10250  
-    4443  
-    443  
-    8080 `
+    `2379 (ETCD)
+     6443 (API Server)
+     10250 (Kubelet)
+     10251 (Scheduler)
+     10252 (Controller-Manager)
+     179 (Calico Network)
+     22 (SSH)
+    `
 
    ##### On Master node and Worker node:
-    `179`  
+    `10250 (Kubelet)
+     30000 - 32767 (Services)
+     179 (Calico Network)
+     22 (SSH)
+    `  
 
    ### `On Master and Worker:`
 1. Perform all the commands as root user unless otherwise specified
@@ -30,12 +36,11 @@ This documentation guides you in setting up a cluster with one master node and t
    ```sh
    yum install -y -q yum-utils device-mapper-persistent-data lvm2 > /dev/null 2>&1
    yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo > /dev/null 2>&1
-   yum install -y -q docker-ce >/dev/null 2>&1
+   yum install docker-ce-18.09.1 docker-ce-cli-18.09.1 containerd.io
    ```
 1. Start Docker services 
    ```sh
-   systemctl enable docker
-   systemctl start docker
+   systemctl daemon-reload && systemctl enable docker && systemctl start docker && systemctl status docker
    ```
 1. Disable SELinux
    ```sh
@@ -86,7 +91,7 @@ This documentation guides you in setting up a cluster with one master node and t
 ## `On Master Node:`
 1. Initialize Kubernetes Cluster
     ```sh
-    kubeadm init --apiserver-advertise-address=<MasterServerIP> --pod-network-cidr=192.168.0.0/16
+    kubeadm init --apiserver-advertise-address=<MasterServerPrivateIP> --pod-network-cidr=192.168.0.0/16
     ```
 1. Create a user for kubernetes administration  and copy kube config file.   
     ``To be able to use kubectl command to connect and interact with the cluster, the user needs kube config file.``  
@@ -121,5 +126,16 @@ This documentation guides you in setting up a cluster with one master node and t
     To Get component status
     ```sh
     kubectl get cs
+    ```
+## `To Remove Nodes from cluster:`
+    On Master
+    ```sh
+    kubectl delete node <nodeName>
+    kubectl get node
+    ```
+## `To Reset cluster(i.e By resetting kubeadm):`
+    On All Nodea
+     ```sh
+    kubeadm reset
     ```
 
