@@ -1,0 +1,95 @@
+Pre-requisite
+-------------------
+1) Amazon-linux-EC2-instance(t2.micro)
+
+
+Steps
+------
+1) Check and Install aws-cli 
+> aws --version
+ aws-cli/1.18
+ it should be equal to or more than 2.2.37 as per aws documentation.
+
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+aws --version
+aws-cli/2.4.7 
+
+2) Installing kubectl
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
+chmod +x kubectl
+mv kubectl /usr/local/bin 
+kubectl version
+v1.21.2
+
+3) Setup eksctl
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
+0.77.0
+
+4) Create IAM Role
+Role: Role-eksctl
+Attach to -> EC2
+Policies to attach -> AmazonEC2FullAccess
+                      AWSCloudFormationFullAccess 
+                      IAMFullAccess  
+                      AdministratorAccess
+
+5) Attach IAM Role to EC2 instance
+Select EC2 instance -> Actions -> Security -> Modify IAM Role : Role-eksctl
+Save
+
+6) Create cluster and nodes
+eksctl create cluster --name cluster-name  \
+--region region-name \
+--node-type instance-type \
+--nodes-min 2 \
+--nodes-max 2 \ 
+--zones <AZ-1>,<AZ-2>
+
+e.g.
+eksctl create cluster --name my-first \
+--region ap-south-1 \
+--node-type t2.medium \
+--zones ap-south-1a,ap-south-1b 
+
+7) Go to CloudFormation Service
+click on stack => Nothing listed
+Now execute eksctl create cluser command in ec2-instance
+Now check stack
+Stack name: eksctl-<clusterName>-cluster
+            eksctl-my-first-cluster
+It will start creating cluster......
+(Note:- It will take 20-25 minutes for creating the cluster)
+
+8) Check Application Flow
+Install git
+ > yum install git -y
+Clone voting app
+ > git clone https://github.com/ayazuddin007/Kubernetes-Mumshad.git
+Go to voting app dir
+ > cd Kubernetes-Mumshad/BASIC/voting-app/
+Create k8s objects
+ > kubectl create -f v2
+ > kubectl get nodes
+ > kubectl get all
+Open 30000-32767 in EKS Cluster Security Group i.e. eks-cluster-sg-my-first  
+ > Custom TCP   30000-32767  
+Access App on browser
+  - See the deployment pod and note the nodeIP
+  - From nodeIP, see the which Public IP of EC2 instance, that nodeIP is there.
+ > http://<publicIP>:30004
+ > http://<publicIP>:30005
+To delete the all k8s objects
+ > kubectl delete -f v2
+
+9) To delete the EKS clsuter
+eksctl delete cluster my-first --region ap-south-1
+
+
+
+
