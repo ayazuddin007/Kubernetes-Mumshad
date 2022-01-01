@@ -9,8 +9,8 @@ spec:
       ports:
         - containerPort: 8080
       volumeMounts:
-      - name: app-config-volume
-        mountPath: /etc/config
+        - name: app-config-volume
+          mountPath: /etc/config
   volumes:
     - name: app-config-volume
       configMap:

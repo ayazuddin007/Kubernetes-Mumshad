@@ -247,7 +247,10 @@ root
 > echo -n 'cGFzczEyMw==' | base64 --decode
 pass123
 
-Note: When we secret as a volume, so each secret Key Value becomes a file inside the secret Mount path.
+Note: 
+1) When we secret as a volume, so each secret Key Value becomes a file inside the secret Mount path.
+2) Inside pod container to find secret as mounted point
+> df -aTh | grep "secret"
 
 
 
