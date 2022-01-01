@@ -36,6 +36,11 @@ kubectl delete -f <podName>.yaml
 kubectl exec -it <podName> -c <containerName> -- /bin/bash     (to enter into pod container)
 kubectl get po <podName> -o jsonpath='{.spec.containers[*].name}'   (to list all containers of a pod) 
 
+Edit Pod (if pod yaml file is not given)
+------------------------------------------
+kubectl get pod <podname> -o yaml > <podName>.yaml
+kubectl edit po <podName>
+
 ReplicationController/ReplicaSet
 ----------------------------------
 kubectl create -f <rcName>.yaml
@@ -89,3 +94,99 @@ voting-app:v1
 kubectl apply -f <dirName>   (for creating all object at once)
 kubectl delete -f <dirName>  (for deleting all object at once)
 kubectl delete all --all     (for deleting all object at once)
+
+kubectl formatting output
+--------------------------
+kubectl [command] [TYPE] [NAME] -o <output_format>
+i.e.
+-o json => Output a JSON format
+-o name => Print only the resource name
+-o wide => Output in the plain-text format
+-o yaml => Output a YAML format
+
+kubectl create namespace <namespaceName> --dry-run -o json
+kubectl create namespace <namsepaceName> --dry-run -o yaml
+
+Namespace
+------------
+kubectl create -f <namespaceName>.yaml
+kubectl create namespace <namespaceName>
+kubectl get ns
+
+
+kubectl get po -n <namespaceName>
+kubectl get po --all-namespaces
+kubectl get po -n kube-system (to list all pods )
+kubectl get po -n default 
+
+kubectl create -f <pod.yaml> -n <namespaceName>
+
+Note: By default there are 4 system created namespace by Kubernetes.
+Default => The default namespace for objects
+kube-system =>  The namespace for objects created by the Kubernetes system
+kube-public =>  This namespace is mostly reserved for cluster usage, in case that 
+                some resources should be visible and readable publicly throughout the whole cluster.
+kube-node-lease => Node leases allow the kubelet to send heartbeats so that 
+                   the control plane can detect node failure.
+
+Namespace and DNS
+-------------------------------
+When you create a Service, it creates a corresponding DNS entry. 
+This entry is of the form <serviceName>.<namespaceName>.svc.cluster.local
+                          i.e db-service.dev.svc.cluster.local
+which means that if a container uses <serviceName> it will resolve to the service which is 
+local to a namespace. We can use same for other namspaces also such as qa,stag,prod.
+
+Set default Namespace by current-context
+------------------------------------------
+kubectl config current-context
+kubectl config set-context $(kubectl config current-context) -n <namespaceName>
+
+Imperative commands
+--------------------
+> for creating pod 
+kubectl run <podName> --image=<imageName>
+kubectl run <podName> --image=<imageName> --label=<key>=<value>
+kubectl run <podName> --image=<imageName> --port=<portNo>
+kubectl run <podName> --image=<imageName> --port=<portNo> --expose 
+kubectl run <podName> --image=<imageName> --dry-run=client -o yaml 
+kubectl run <podName> --image=<imageName> --dry-run=client -o yaml >  pod-definition.yaml
+
+
+> for creating deployment
+kubectl create deployment <deploymentName> --image=<imageName>
+kubectl create deployment <deploymentName> --image=<imageName> --dry-run -o yaml
+kubectl create deployment <deploymentName> --image=<imageName> --dry-run=client -o yaml > deployment-definition.yaml
+kubectl create deployment <deploymentName> --image=<imageName> --replicas=<number> --dry-run=client -o yaml > deployment-definition.yaml 
+
+> for creating service 
+|_ as ClusterIP
+kubectl expose pod <podName> --port=<portNo> --name <serviceName> --dry-run=client -o yaml
+kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
+                OR
+kubectl create service <svcType> <svcName> --tcp=<portNo>:<portNo> --dry-run=client -o yaml
+kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml
+
+|_ as NodePort
+kubectl expose pod <podName> --port=<portNo> --name <serviceName> --type=NodePort --dry-run=client -o yaml
+kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort --dry-run=client -o yaml
+                OR
+kubectl create service <svcType> <svcName> --tcp=<portNo>:<portNo> --node-port=<portNo> --dry-run=client -o yaml
+kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
+
+Config-Map
+------------
+kubeclt create -f <configMap>.yml
+kubeclt delete -f <configMap>.yml
+kubectl get cm
+kubectl get cm <configMapName> -o yaml
+kubectl describe cm <configMapName>
+kubectl delete cm <configMapName>
+
+|_ configmap from label
+kubectl create configmap <configMapName> --from-literal=<key>=<value> --from-literal=<key>=<value>
+kubectl create configmap app-config --from-literal=APP_COLOR=blue --from-literal=APP_MODE=prod
+
+|_ configmap from file
+kubectl create configmap <configMapName> --from-file=<path-of-file>
+  kubectl create configmap app-config --from-file=/files/ckad/ConfigMap/app-config.properties
