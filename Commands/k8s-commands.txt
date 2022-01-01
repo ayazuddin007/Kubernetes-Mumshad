@@ -1,25 +1,25 @@
 docker
-------------
+======
 docker system prune -f
 docker image prune -f
 docker rm -f $(docker ps -a -q)
 docker volume rm $(docker volume ls -q)
 
 Minikube
--------------
+=========
 minikube start --vm-driver=none
 minikube status
 minikube stop
 
 Cluster-info
---------------
+=============
 kubectl cluster-info
 kubectl cluster-info dump
 kubectl version
 kubedm --version
 
 Pod
-----
+======
 kubectl run <podName> --image=<imageName>
 kubectl run <podName> --image=<imageName> --dry-run -o yaml > <podName>.yaml          (to create pod yaml 
 file from commandline)
@@ -34,6 +34,7 @@ kubectl logs -f <podName>   (for continuous log)
 kubectl create -f <podName>.yaml
 kubectl delete -f <podName>.yaml
 kubectl exec -it <podName> -c <containerName> -- /bin/bash     (to enter into pod container)
+kubectl exec -it <podName> -c <containerName> -- <linuxCommand>     (to run linux command in a container)
 kubectl get po <podName> -o jsonpath='{.spec.containers[*].name}'   (to list all containers of a pod) 
 
 Edit Pod (if pod yaml file is not given)
@@ -42,7 +43,7 @@ kubectl get pod <podname> -o yaml > <podName>.yaml
 kubectl edit po <podName>
 
 ReplicationController/ReplicaSet
-----------------------------------
+=================================
 kubectl create -f <rcName>.yaml
 kubectl create -f <rsName>.yaml
 kubectl delete -f <rsName>.yaml
@@ -55,7 +56,7 @@ kubectl describe rs <rsName>
 kubectl edit rs <rsName>
 
 Deployment
---------------
+===========
 kubectl create -f <deploymentName>.yaml
 kubectl delete -f <deploymentName>.yaml
 kubectl get deployments
@@ -78,7 +79,7 @@ Note:
 Default strategy is RollingUpdate
 
 Service
------------
+========
 kubectl create -f <serviceName>.yaml
 kubectl delete -f <serviceName>.yaml
 kubectl get svc
@@ -90,13 +91,13 @@ Note:
 Default service type  is ClusterIP
 
 voting-app:v1
------------------
+==============
 kubectl apply -f <dirName>   (for creating all object at once)
 kubectl delete -f <dirName>  (for deleting all object at once)
 kubectl delete all --all     (for deleting all object at once)
 
 kubectl formatting output
---------------------------
+==========================
 kubectl [command] [TYPE] [NAME] -o <output_format>
 i.e.
 -o json => Output a JSON format
@@ -108,7 +109,7 @@ kubectl create namespace <namespaceName> --dry-run -o json
 kubectl create namespace <namsepaceName> --dry-run -o yaml
 
 Namespace
-------------
+============
 kubectl create -f <namespaceName>.yaml
 kubectl create namespace <namespaceName>
 kubectl get ns
@@ -143,8 +144,9 @@ kubectl config current-context
 kubectl config set-context $(kubectl config current-context) -n <namespaceName>
 
 Imperative commands
---------------------
-> for creating pod 
+=====================
+a) for creating pod
+-------------------- 
 kubectl run <podName> --image=<imageName>
 kubectl run <podName> --image=<imageName> --label=<key>=<value>
 kubectl run <podName> --image=<imageName> --port=<portNo>
@@ -153,13 +155,15 @@ kubectl run <podName> --image=<imageName> --dry-run=client -o yaml
 kubectl run <podName> --image=<imageName> --dry-run=client -o yaml >  pod-definition.yaml
 
 
-> for creating deployment
+b) for creating deployment
+--------------------------
 kubectl create deployment <deploymentName> --image=<imageName>
 kubectl create deployment <deploymentName> --image=<imageName> --dry-run -o yaml
 kubectl create deployment <deploymentName> --image=<imageName> --dry-run=client -o yaml > deployment-definition.yaml
 kubectl create deployment <deploymentName> --image=<imageName> --replicas=<number> --dry-run=client -o yaml > deployment-definition.yaml 
 
-> for creating service 
+c) for creating service
+------------------------ 
 |_ as ClusterIP
 kubectl expose pod <podName> --port=<portNo> --name <serviceName> --dry-run=client -o yaml
 kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
@@ -175,7 +179,9 @@ kubectl create service <svcType> <svcName> --tcp=<portNo>:<portNo> --node-port=<
 kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
 
 Config-Map
-------------
+==========
+a) Declarative way
+------------------
 kubeclt create -f <configMap>.yml
 kubeclt delete -f <configMap>.yml
 kubectl get cm
@@ -183,6 +189,8 @@ kubectl get cm <configMapName> -o yaml
 kubectl describe cm <configMapName>
 kubectl delete cm <configMapName>
 
+b) Imperative way
+-----------------
 |_ configmap from label
 kubectl create configmap <configMapName> --from-literal=<key>=<value> --from-literal=<key>=<value>
 kubectl create configmap app-config --from-literal=APP_COLOR=blue --from-literal=APP_MODE=prod
@@ -190,3 +198,59 @@ kubectl create configmap app-config --from-literal=APP_COLOR=blue --from-literal
 |_ configmap from file
 kubectl create configmap <configMapName> --from-file=<path-of-file>
   kubectl create configmap app-config --from-file=/files/ckad/ConfigMap/app-config.properties
+
+Secret
+======
+a) Declarative way
+------------------
+kubectl create -f <secret>.yml
+kubectl deploymentName -f <secret>.yml
+kubectl get secret
+kubectl get secret <secretName>
+kubectl get secret <secretName> -o yaml
+kubectl describe secret <secretName>
+kubectl delete secret <secretName>
+
+b) Imperative way
+-----------------
+|_ secret from label
+kubectl create secret generic <secretName> --from-literal=<key>=<value> --from-literal=<key>=<value>
+kubectl create secret generic app-secret --from-literal=DB_Host=mysql --from-literal=DB_User=root --from-literal=DB_Password=pass123
+
+|_ secret from file
+kubectl create secret generic <secretName> --from-file=<path-of-file>
+kubectl create secret generic app-secret --from-file=/files/ckad/secret/app-secret.properties
+
+Note: We should provide secret value in encoded/hash format.
+
+Secret Encode
+--------------
+echo -n '<keyValue>' | base64
+<EncodeValue>
+i.e.
+> echo -n 'mysql' | base64
+
+> echo -n 'root' | base64
+
+> echo -n 'pass123' | base64
+
+
+Secret Decode
+-------------
+echo -n '<EncodeValue>' | base64 --decode
+<keyValue>
+i.e.
+> echo -n '' | base64 --decode
+mysql
+> echo -n '' | base64 --decode
+root
+> echo -n '' | base64 --decode
+pass123
+
+Note: When we secret as a volume, so each secret Key Value becomes a file inside the secret Mount path.
+
+
+
+
+
+
