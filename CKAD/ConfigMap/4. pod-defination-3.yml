@@ -15,3 +15,13 @@ spec:
     - name: app-config-volume
       configMap:
         name: app-config
+
+
+# When we create configmap as a volume, so each configmap Key Value becomes a file inside the configmap Mount path.
+# ls /etc/config/
+# APP_COLOR  APP_MODE
+# cat /etc/config/APP_COLOR       => blue
+# cat /etc/config/APP_MODE        => prod
+
+# Inside pod container to find configmap as mounted point
+# df -aTh | grep "config"

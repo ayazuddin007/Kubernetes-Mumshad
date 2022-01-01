@@ -199,6 +199,11 @@ kubectl create configmap app-config --from-literal=APP_COLOR=blue --from-literal
 kubectl create configmap <configMapName> --from-file=<path-of-file>
   kubectl create configmap app-config --from-file=/files/ckad/ConfigMap/app-config.properties
 
+Note: 
+1) When we create configmap as a volume, so each configmap Key Value becomes a file inside the configmap Mount path.
+2) Inside pod container to find configmap as mounted point
+> df -aTh | grep "config"
+
 Secret
 ======
 a) Declarative way
@@ -248,7 +253,7 @@ root
 pass123
 
 Note: 
-1) When we secret as a volume, so each secret Key Value becomes a file inside the secret Mount path.
+1) When we create secret as a volume, so each secret Key Value becomes a file inside the secret Mount path.
 2) Inside pod container to find secret as mounted point
 > df -aTh | grep "secret"
 
