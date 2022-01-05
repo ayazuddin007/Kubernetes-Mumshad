@@ -1,16 +1,19 @@
+============
 docker
-======
+============
 docker system prune -f
 docker image prune -f
 docker rm -f $(docker ps -a -q)
 docker volume rm $(docker volume ls -q)
 
+=========
 Minikube
 =========
 minikube start --vm-driver=none
 minikube status
 minikube stop
 
+=============
 Cluster-info
 =============
 kubectl cluster-info
@@ -18,6 +21,7 @@ kubectl cluster-info dump
 kubectl version
 kubedm --version
 
+======
 Pod
 ======
 kubectl run <podName> --image=<imageName>
@@ -42,6 +46,7 @@ Edit Pod (if pod yaml file is not given)
 kubectl get pod <podname> -o yaml > <podName>.yaml
 kubectl edit po <podName>
 
+=================================
 ReplicationController/ReplicaSet
 =================================
 kubectl create -f <rcName>.yaml
@@ -55,6 +60,7 @@ kubectl delete rs <rsName>
 kubectl describe rs <rsName>
 kubectl edit rs <rsName>
 
+===========
 Deployment
 ===========
 kubectl create -f <deploymentName>.yaml
@@ -76,8 +82,10 @@ kubectl rollout undo deploy <deploymentName>
 kubectl rollout undo deploy <deploymentName> --to-revision=<no>
 
 Note: 
+-----
 Default strategy is RollingUpdate
 
+========
 Service
 ========
 kubectl create -f <serviceName>.yaml
@@ -88,14 +96,17 @@ kubectl describe svc <serviceName>
 kubectl edit svc <serviceName>
 
 Note: 
+-----
 Default service type  is ClusterIP
 
+==============
 voting-app:v1
 ==============
 kubectl apply -f <dirName>   (for creating all object at once)
 kubectl delete -f <dirName>  (for deleting all object at once)
 kubectl delete all --all     (for deleting all object at once)
 
+==========================
 kubectl formatting output
 ==========================
 kubectl [command] [TYPE] [NAME] -o <output_format>
@@ -108,6 +119,7 @@ i.e.
 kubectl create namespace <namespaceName> --dry-run -o json
 kubectl create namespace <namsepaceName> --dry-run -o yaml
 
+============
 Namespace
 ============
 kubectl create -f <namespaceName>.yaml
@@ -143,6 +155,7 @@ Set default Namespace by current-context
 kubectl config current-context
 kubectl config set-context $(kubectl config current-context) -n <namespaceName>
 
+=====================
 Imperative commands
 =====================
 a) for creating pod
@@ -178,8 +191,9 @@ kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort --dry-ru
 kubectl create service <svcType> <svcName> --tcp=<portNo>:<portNo> --node-port=<portNo> --dry-run=client -o yaml
 kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
 
+===========
 Config-Map
-==========
+===========
 a) Declarative way
 ------------------
 kubeclt create -f <configMap>.yml
@@ -200,16 +214,18 @@ kubectl create configmap <configMapName> --from-file=<path-of-file>
   kubectl create configmap app-config --from-file=/files/ckad/ConfigMap/app-config.properties
 
 Note: 
+-----
 1) When we create configmap as a volume, so each configmap Key Value becomes a file inside the configmap Mount path.
 2) Inside pod container to find configmap as mounted point
 > df -aTh | grep "config"
 
+=========
 Secret
-======
+=========
 a) Declarative way
 ------------------
 kubectl create -f <secret>.yml
-kubectl deploymentName -f <secret>.yml
+kubectl delete -f <secret>.yml
 kubectl get secret
 kubectl get secret <secretName>
 kubectl get secret <secretName> -o yaml
@@ -226,7 +242,10 @@ kubectl create secret generic app-secret --from-literal=DB_Host=mysql --from-lit
 kubectl create secret generic <secretName> --from-file=<path-of-file>
 kubectl create secret generic app-secret --from-file=/files/ckad/secret/app-secret.properties
 
-Note: We should provide secret value in encoded/hash format.
+Note: 
+-----
+1) We should provide secret value in encoded/hash format.
+2) Default type of secret is opaque.
 
 Secret Encode
 --------------
@@ -253,12 +272,69 @@ root
 pass123
 
 Note: 
+-----
 1) When we create secret as a volume, so each secret Key Value becomes a file inside the secret Mount path.
 2) Inside pod container to find secret as mounted point
 > df -aTh | grep "secret"
 
+=================
+Security Context
+=================
+kubectl apply -f <securityContext>-pod.yml
+kubectl delete -f <securityContext>-pod.yml
+kubectl exec -it <podName> -- <linuxCommand>
+kubectl exec -it <podName> -c <containerName> -- <linuxCommand>
+
+Note:
+-----
+1) SecurityContext defined at the pod level will be automatically assigned to all the containers 
+inside that pod.
+2) If SecurityContext is same at both pod and container level, then container level securityContext 
+will overwrite the securityContext of pod level.
+3) Capibilities are only supported at the container level and not at th pod level 
+
+==================
+Service Account
+==================
+a) Declarative way
+------------------
+kubectl create -f <serviceAccount>.yml
+kubectl delete -f <serviceAccount>.yml
+kubectl get sa
+kubectl desribe sa <serviceAccountName>
+
+b) Imperative way
+-----------------
+kubectl create sa <serviceAccountName>
+
+Note:
+-----
+1) When you create a pod, if you do not specify a service account, it is automatically assigned 
+the default service account in the same namespace.
+2) you can opt out of automounting API credentials for a service account by setting 
+automountServiceAccountToken: false on the service account.
+3) Every namespace has a default service account resource called default.
+4) you will see that a token has automatically been created and is referenced by the service account.
+5) Service Account token is created as secret which is mounted as volume to a pod.
 
 
+==================
+Resource Limit
+==================
+kubectl top <no>
+kubectl top no <nodeName>
+kubectl top <po>
+kubectl top po <podName>
 
-
+Notes:
+------
+1) If container consume more memory than its limit, then container is terminated.
+2) The memory resource is measured in bytes. You can express memory as one of these 
+   suffixes: E, P, T, G, M, K, Ei, Pi, Ti, Gi, Mi, Ki. 
+  i.e. 128974848, 129e6, 129M , 123Mi
+3) If you do not specify a memory limit for a Container, The Container could use all 
+of the memory available on the Node where it is running which in turn could 
+invoke the OOM Killer. (OOM Kill, a container with no resource limits)
+4) If you do not specify a CPU limit for a Container, The Container could use all of the CPU resources 
+available on the Node where it is running.
 
