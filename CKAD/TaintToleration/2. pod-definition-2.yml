@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  tolerations:
+  - key: "key1"
+    operator: "Equal"
+    value: "value1"
+    effect: "NoExecute"
+    tolerationSeconds: 3600
+
+# Note
+# ------
+# 1) tolerationSeconds field that dictates how long the pod will stay bound to the node 
+# after the taint is added.
+# 2) if this pod is running and a matching taint is added to the node, then the pod will stay 
+# bound to the node for 3600 seconds, and then be evicted. If the taint is removed before 
+# that time, the pod will not be evicted.

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:  
+  containers:
+  - name: nginx
+    image: nginx
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: size
+            operator: In
+            values:
+            - Large
+            - Medium
+
+# requiredDuringSchedulingIgnoredDuringExecution
+#------------------------------------------------ 
+# try to run this set of pods on node, but if it's not possible, 
+# then allow some to run elsewhere

@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:  
+  containers:
+  - name: nginx
+    image: nginx
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: size
+            operator: In
+            values:
+            - Large
+            - Medium
+
+# operators
+#-----------
+# In, NotIn, Exists, DoesNotExist, Gt, Lt. You can use NotIn and DoesNotExist
+
+# requiredDuringSchedulingIgnoredDuringExecution
+#------------------------------------------------
+# only run the pod on nodes with matched label
+

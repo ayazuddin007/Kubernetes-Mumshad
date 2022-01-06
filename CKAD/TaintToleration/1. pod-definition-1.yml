@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  tolerations:
+  - key: "key1"
+    operator: "Exists"
+    effect: "NoSchedule"
+
+# Note
+#-------
+# 1) An empty key i.e. (Key: "") with operator Exists matches all keys, values and effects 
+# which means this will tolerate everything.
+# 2) An empty effect i.e. (effect: "") matches all effects with key key1.
+
+#Operator
+#--------
+# 1) the operator is Exists (in which case no value should be specified)
+# 2) the operator is Equal and the values are equal.

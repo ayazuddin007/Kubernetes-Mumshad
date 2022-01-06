@@ -161,7 +161,7 @@ Imperative commands
 a) for creating pod
 -------------------- 
 kubectl run <podName> --image=<imageName>
-kubectl run <podName> --image=<imageName> --label=<key>=<value>
+kubectl run <podName> --image=<imageName> --labels=<key>=<value>
 kubectl run <podName> --image=<imageName> --port=<portNo>
 kubectl run <podName> --image=<imageName> --port=<portNo> --expose 
 kubectl run <podName> --image=<imageName> --dry-run=client -o yaml 
@@ -321,10 +321,10 @@ automountServiceAccountToken: false on the service account.
 ==================
 Resource Limit
 ==================
-kubectl top <no>
+kubectl top <no>    (to get the mem/cpu information of nodes)
 kubectl top no <nodeName>
-kubectl top <po>
-kubectl top po <podName>
+kubectl top <po>    (to get the mem/cpu information of pods)
+kubectl top po <podName> 
 
 Notes:
 ------
@@ -338,3 +338,61 @@ invoke the OOM Killer. (OOM Kill, a container with no resource limits)
 4) If you do not specify a CPU limit for a Container, The Container could use all of the CPU resources 
 available on the Node where it is running.
 
+====================
+Taint & Toleration
+====================
+Taint => on Node only
+Toleration => on Pod only
+
+kubectl taint no <nodeName> key1=value1:<effect> (to add taint)
+i.e.
+kubectl taint no node1 key1=value1:NoSchedule
+kubectl taint no node1 key1=value1:NoExecute
+
+kubectl taint no node1 key1=value1:<effect>- (to remove taint)
+i.e.
+kubectl taint no node1 key1=value1:NoSchedule-
+kubectl taint no node1 key1=value1:NoExecute-  
+
+
+effect
+------
+- NoSchedule:- no pod will be able to schedule onto node unless it has a matching toleration.
+- PreferNoSchedule:- the system will try to avoid placing a pod that does not tolerate 
+                    the taint on the node.
+- NoExecute:- pods that do not tolerate the taint will be evicted immediately.
+
+operator
+--------
+- if operator is Equal i.e. (values are equal)
+- if opertor is Exists i.e. (no value specified)
+
+Note
+----
+1) Tolerations are applied to pods, and allow the pods to schedule onto nodes with matching taints.
+
+====================
+Node Selector
+====================
+kubectl label no <nodeName> <label-key>=<label-value>
+e.g.
+kubectl label no node1 size=Large
+kubectl get no --show-labels
+
+
+====================
+Node Affinity
+====================
+kubectl label no <nodeName> <label-key>=<label-value>
+e.g.
+kubectl label no node1 size=Large
+kubectl get no --show-labels
+kubectl get po -o wide
+
+Node-Affinity Rules
+-----------------------
+1) requiredDuringSchedulingIgnoredDuringExecution
+      Pod will get scheduled only on a node that has a size=Large label.
+
+2) preferredDuringSchedulingIgnoredDuringExecution
+      Pod will prefer a node that has a size=Large label.
