@@ -47,18 +47,15 @@ Install Kubectl
 	mv ./kubectl /usr/local/bin/kubectl
 	kubectl version --client
 	
-It will show in output
-
 	Client Version: version.Info{Major:"1", Minor:"24"}
-
+	
+	OR 
+	
 	curl -LO "https://dl.k8s.io/release/v1.22.1/bin/linux/amd64/kubectl"
 	sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 	kubectl version --client
 	
-It will show in output
-
-	Client Version: version.Info{Major:"1", Minor:"22"
-
+	Client Version: version.Info{Major:"1", Minor:"22"}
 	
 Install Minikube
 --------------------
@@ -296,16 +293,23 @@ kubectl delete deploy sa
 2) 
 ---
 kubectl create deployment sa --image=docker.io/ayazway/simple-devops-image
+	
 kubectl get deploy
+	
 kubectl get po
+	
 kubectl expose deployment sa --type=NodePort --port 8080
+	
 kubectl get svc
+	
 minikube service sa --url
+	
 curl http://172.31.32.87:30604/webapp
 
 Browse: http://172.31.32.87:30604/webapp
 
 kubectl delete svc sa
+	
 kubectl delete deploy sa
 
 3) 
