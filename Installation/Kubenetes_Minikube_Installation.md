@@ -150,7 +150,9 @@ To check Deployment
 To access the hello-minikube Deployment, expose it as a Service: (Creating a Kubernetes Service)
 ----------------------------------------------------------------------
 	kubectl expose deployment hello-minikube --type=NodePort --port 8080
-The option --type=NodePort specifies the type of the Service.
+The option 
+	--type=NodePort specifies the type of the Service.
+	 --port defines the port
 
 It will show in output
 
