@@ -286,57 +286,66 @@ Pull docker image
 
 Create Deployment
 -------------------------
-kubectl create deployment <Deployment Name> --image=docker.io/ayazway/<Image Name>:latest 
+
+	kubectl create deployment <Deployment Name> --image=docker.io/ayazway/<Image Name>:latest 
 
 Get Deploymet List
 ---------------------
-kubectl get deploy
+
+	kubectl get deploy
 
 Create Service
 -------------------
-kubectl expose deployment <Deployment Name> --type=<Service Type> --port <Port Number>
-Service Type=NodePort
-Port Number=8080
+
+	kubectl expose deployment <Deployment Name> --type=<Service Type> --port <Port Number>
+	
+	Service Type=NodePort
+	Port Number=8080
 
 
 Get Service List
 ---------------------
-kubectl get service
-  open port 32074 in Minikube-SG
+
+	kubectl get service
+	
+	open port 32074 in Minikube-SG
 
 
 To get exposed Service URL
 --------------------------------
-minikube service <Service Name> --url
+
+	minikube service <Service Name> --url
 
 Delete Service and Deploy
 -----------------------------
-kubectl delete service <Service Name>
-kubectl delete deploy <Deployment Name>
+
+	kubectl delete service <Service Name>
+	
+	kubectl delete deploy <Deployment Name>
 
 Example
 ========
 1)
-----
-kubectl create deployment sa --image=docker.io/ayazway/sampleapp
 	
-kubectl get deploy
+	kubectl create deployment sa --image=docker.io/ayazway/sampleapp
 	
-kubectl get po
+	kubectl get deploy
 	
-kubectl expose deployment sa --type=NodePort --port 8080
+	kubectl get po
 	
-kubectl get svc
+	kubectl expose deployment sa --type=NodePort --port 8080
 	
-minikube service sa --url
+	kubectl get svc
 	
-curl http://172.31.32.87:30604/sampleapp
+	minikube service sa --url
+	
+	curl http://172.31.32.87:30604/sampleapp
 
-Browse: http://172.31.32.87:30604/sampleapp
+	Browse: http://172.31.32.87:30604/sampleapp
 
-kubectl delete svc sa
+	kubectl delete svc sa
 	
-kubectl delete deploy sa
+	kubectl delete deploy sa
 
 2) 
 ---
