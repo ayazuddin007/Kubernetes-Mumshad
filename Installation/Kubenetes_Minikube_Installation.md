@@ -10,13 +10,17 @@ Storage		8 GB (gp2)
 Tags		K8S-Minikube
 
 Security Group	K8S-Minikube-SG
+
 	SSH  22  0.0.0.0/0
+	
 	Http   80  0.0.0.0/0
+	
 	Custom 30000 - 65535  0.0.0.0/0
 	
 Key Pair	ayzdn.pem
 
-Note: 	- An update to Minikube required a minimum of 2 vCPUs
+Note: 	
+	- An update to Minikube required a minimum of 2 vCPUs
 	-  changed the Instance Type from t2.micro (1 vCPU) to t3.micro (2 vCPU)/t2.medium
 
 
