@@ -278,8 +278,8 @@ Docker Login
 	docker login
 
 	username: ayazway
-
-	pass:	
+	pass: <Enter Password>
+	
 	Login Successful
 
 Pull docker image
