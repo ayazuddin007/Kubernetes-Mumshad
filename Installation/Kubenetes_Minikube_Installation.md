@@ -19,9 +19,9 @@ Security Group	K8S-Minikube-SG
 	
 Key Pair	ayzdn.pem
 
-Note: 	
-	- An update to Minikube required a minimum of 2 vCPUs
-	-  changed the Instance Type from t2.micro (1 vCPU) to t3.micro (2 vCPU)/t2.medium
+Note	
+An update to Minikube required a minimum of 2 vCPUs
+changed the Instance Type from t2.micro (1 vCPU) to t3.micro (2 vCPU)/t2.medium
 
 
 SSH to K8S-Minikube
@@ -46,13 +46,17 @@ Install Kubectl
 	chmod +x ./kubectl
 	mv ./kubectl /usr/local/bin/kubectl
 	kubectl version --client
-It will show in output:
+	
+It will show in output
+
 	Client Version: version.Info{Major:"1", Minor:"24"}
 
 	curl -LO "https://dl.k8s.io/release/v1.22.1/bin/linux/amd64/kubectl"
 	sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 	kubectl version --client
-It will show in output:
+	
+It will show in output
+
 	Client Version: version.Info{Major:"1", Minor:"22"
 
 	
@@ -62,7 +66,9 @@ Install Minikube
 	chmod +x minikube
 	mv minikube /usr/local/bin/
 	minikube version
-It will show in output:
+	
+It will show in output
+
 	minikube version: v1.26.0
 
 Running Minikube
@@ -71,7 +77,9 @@ Running Minikube
 
 Error:  	* Using the none driver based on user configuration
 	X Sorry, Kubernetes v1.18.2 requires conntrack to be installed in root's path
-Solution:  sudo apt-get install -y conntrack
+	
+Solution  
+	sudo apt-get install -y conntrack
 		
 Again Try
 	minikube start --vm-driver=none
@@ -86,11 +94,15 @@ It will show in output:
 
 
 
-Error: Failed to enable unit: Unit file cri-docker.socket does not exist
-Solution:  https://www.mirantis.com/blog/how-to-install-cri-dockerd-and-migrate-nodes-from-dockershim
+Error
+	Failed to enable unit: Unit file cri-docker.socket does not exist
+Solution
+	https://www.mirantis.com/blog/how-to-install-cri-dockerd-and-migrate-nodes-from-dockershim
 
-Error:  X Exiting due to RUNTIME_ENABLE: Temporary Error: sudo crictl version: exit status 1
-Solution: https://citizix.com/how-to-install-cri-o-container-runtime-on-ubuntu-20-04/
+Error
+	X Exiting due to RUNTIME_ENABLE: Temporary Error: sudo crictl version: exit status 1
+Solution
+	https://citizix.com/how-to-install-cri-o-container-runtime-on-ubuntu-20-04/
 
 Check the status of Minikube
 --------------------------------
