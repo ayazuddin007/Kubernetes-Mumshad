@@ -86,6 +86,7 @@ Solution
 	sudo apt-get install -y conntrack
 		
 Again Try
+
 	minikube start --vm-driver=none
 
 It will show in output:
@@ -120,6 +121,7 @@ Check the status of Minikube
 	minikube status
 
 It will show in output:
+
 	minikube
 	type: Control Plane
 	host: Running
