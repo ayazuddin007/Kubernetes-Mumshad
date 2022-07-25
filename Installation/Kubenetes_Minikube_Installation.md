@@ -168,6 +168,7 @@ Get Pod list and Status
 -------------------------
 The hello-minikube Pod is now launched but you have to wait until the Pod is up before accessing it via the exposed Service.
 Check if the Pod is up and running:
+
 To Check Pod
 	kubectl get pod
 	
@@ -198,8 +199,10 @@ It will show in output:
 	kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP          15m
 
 So Here 8080:31052/TCP means that
-Port 31052  - Port of EC2 Instance
-Port 8080   - Port of Pod
+
+	Port 31052  - Port of EC2 Instance
+
+	Port 8080   - Port of Pod
 
 Get the URL of the exposed Service to view the Service details:
 -----------------------------------------------------------------
