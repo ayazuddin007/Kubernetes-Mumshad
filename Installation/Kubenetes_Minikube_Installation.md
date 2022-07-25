@@ -325,6 +325,7 @@ Delete Service and Deploy
 
 Example
 ========
+
 1)
 ---
 	
@@ -350,47 +351,49 @@ Example
 
 2) 
 ---
-kubectl create deployment sa --image=docker.io/ayazway/simple-devops-image
-	
-kubectl get deploy
-	
-kubectl get po
-	
-kubectl expose deployment sa --type=NodePort --port 8080
-	
-kubectl get svc
-	
-minikube service sa --url
-	
-curl http://172.31.32.87:30604/webapp
 
-Browse: http://172.31.32.87:30604/webapp
-
-kubectl delete svc sa
+	kubectl create deployment sa --image=docker.io/ayazway/simple-devops-image
 	
-kubectl delete deploy sa
+	kubectl get deploy
+	
+	kubectl get po
+	
+	kubectl expose deployment sa --type=NodePort --port 8080
+	
+	kubectl get svc
+	
+	minikube service sa --url
+	
+	curl http://172.31.32.87:30604/webapp
+
+	Browse: http://172.31.32.87:30604/webapp
+
+	kubectl delete svc sa
+	
+	kubectl delete deploy sa
 
 3) 
 ---
-kubectl create deployment sa --image=docker.io/ayazway/myimg
-	
-kubectl get deploy
-	
-kubectl get po
-	
-kubectl expose deployment sa --type=NodePort --port 8080
-	
-kubectl get svc
-	
-minikube service sa --url
-	
-curl http://172.31.32.87:30604/webapp
 
-Browse: http://172.31.32.87:30604/webapp
-
-kubectl delete svc sa
+	kubectl create deployment sa --image=docker.io/ayazway/myimg
 	
-kubectl delete deploy sa
+	kubectl get deploy
+	
+	kubectl get po
+	
+	kubectl expose deployment sa --type=NodePort --port 8080
+	
+	kubectl get svc
+	
+	minikube service sa --url
+	
+	curl http://172.31.32.87:30604/webapp
+
+	Browse: http://172.31.32.87:30604/webapp
+
+	kubectl delete svc sa
+	
+	kubectl delete deploy sa
 
 
 
