@@ -1,8 +1,10 @@
 Pre-Requisite
 ------------------
 AMI: Ubuntu Server 18.04 LTS (Free Tier)
+
 Instance Type	t3.micro (2 vCPU, 1GB Memory)
 		t2.medium
+		
 Storage		8 GB (gp2)
 Tags		K8S-Minikube
 Security Group	K8S-Minikube-SG
