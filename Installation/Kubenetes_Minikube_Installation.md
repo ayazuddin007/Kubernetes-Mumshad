@@ -133,7 +133,7 @@ It will show in output:
 Running our first container (Creating a Kubernetes Deployment)
 ------------------------------------------------------------------
 Now, you can interact with your cluster using kubectl.
-Let’s create a Kubernetes Deployment using an existing image named echoserver, which is a simple HTTP server and expose it on port 8080 using --port.
+Let’s create a Kubernetes Deployment using an existing image named echoserver, which is a simple HTTP server and expose it on port 8080.
 
 	kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10 
 
