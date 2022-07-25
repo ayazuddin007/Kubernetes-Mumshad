@@ -86,6 +86,7 @@ Again Try
 	minikube start --vm-driver=none
 
 It will show in output:
+
 	To use kubectl or minikube commands as your own user, you may need to relocate them. For example, to overwrite your own settings, run:
 	*
   	- sudo mv /root/.kube /root/.minikube $HOME
@@ -97,12 +98,17 @@ It will show in output:
 
 Error
 	Failed to enable unit: Unit file cri-docker.socket does not exist
+	
 Solution
+
 	https://www.mirantis.com/blog/how-to-install-cri-dockerd-and-migrate-nodes-from-dockershim
 
 Error
+
 	X Exiting due to RUNTIME_ENABLE: Temporary Error: sudo crictl version: exit status 1
+	
 Solution
+
 	https://citizix.com/how-to-install-cri-o-container-runtime-on-ubuntu-20-04/
 
 Check the status of Minikube
