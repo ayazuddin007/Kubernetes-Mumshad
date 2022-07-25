@@ -20,9 +20,8 @@ Security Group	K8S-Minikube-SG
 Key Pair	ayzdn.pem
 
 Note
-------
-An update to Minikube required a minimum of 2 vCPUs
-changed the Instance Type from t2.micro (1 vCPU) to t3.micro (2 vCPU)/t2.medium
+	An update to Minikube required a minimum of 2 vCPUs
+	changed the Instance Type from t2.micro (1 vCPU) to t3.micro (2 vCPU)/t2.medium
 
 
 SSH to K8S-Minikube
@@ -63,6 +62,7 @@ Specific Version
 Install Minikube
 --------------------
 Latest Version
+
 	curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 	chmod +x minikube
 	mv minikube /usr/local/bin/
