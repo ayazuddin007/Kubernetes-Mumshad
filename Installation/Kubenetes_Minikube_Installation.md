@@ -207,25 +207,35 @@ So Here 8080:31052/TCP means that
 Get the URL of the exposed Service to view the Service details:
 -----------------------------------------------------------------
 	minikube service hello-minikube --url
-It will show in output:
+	
+It will show in output
+
 	http://172.31.10.73:31052
+	
 To Access Within the Minikube
+
 	http://<Minikube Private IP>:<Port>
 	http://172.31.10.73:31052
+	
 To Access Outside of Minikube(On Browser)
+
 	http://<Minikube Public IP>:<Port>
 	http://65.1.248.140:31052
 
 Delete the hello-minikube Service
 -------------------------------------
 	kubectl delete services hello-minikube
-It will show in output:
+	
+It will show in output
+
 	service "hello-minikube" deleted
 
 Delete the hello-minikube Deployment
 ---------------------------------------
 	kubectl delete deployment hello-minikube
-It will show in output:
+	
+It will show in output
+
 	deployment.apps "hello-minikube" deleted
 
 Stop the local Minikube cluster
@@ -238,15 +248,20 @@ It will show in output:
 Delete the local Minikube cluster
 -----------------------------------
 	minikube delete
-It will show in output::
+	
+It will show in output
+
 	Deleting "minikube" ...
 	The "minikube" cluster has been deleted.
 
 Restart the local Minikube cluster
 -------------------------------------
 After Stop Minikube
+
 	minikube start
+	
 After Deleting Minikube
+
 	minikube start --vm-driver=none
 
 
@@ -265,9 +280,6 @@ docker images
 Create Deployment
 -------------------------
 kubectl create deployment <Deployment Name> --image=docker.io/ayazway/<Image Name>:latest 
-i.e.
- 
-
 
 Get Deploymet List
 ---------------------
