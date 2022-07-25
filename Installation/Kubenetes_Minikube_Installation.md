@@ -267,20 +267,22 @@ After Deleting Minikube
 	minikube start --vm-driver=none
 
 
-Another Example
-===========================================
+Docker Login
+--------------
 
-docker login
+	docker login
 
-username: ayazway
+	username: ayazway
 
-pass:	
-Login Successful
+	pass:	
+	Login Successful
 
 Pull docker image
 --------------------
-docker pull docker.io/ayazway/<Image Name>:latest 
-docker images
+
+	docker pull docker.io/ayazway/<Image Name>:latest 
+	
+	docker images
 
 Create Deployment
 -------------------------
