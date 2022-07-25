@@ -76,10 +76,13 @@ Running Minikube
 -------------------
 	minikube start --vm-driver=none
 
-Error:  	* Using the none driver based on user configuration
+Error 1 	
+	
+	* Using the none driver based on user configuration
 	X Sorry, Kubernetes v1.18.2 requires conntrack to be installed in root's path
 	
-Solution  
+Solution 
+
 	sudo apt-get install -y conntrack
 		
 Again Try
@@ -96,7 +99,7 @@ It will show in output:
 
 
 
-Error
+Error 2
 
 	Failed to enable unit: Unit file cri-docker.socket does not exist
 	
@@ -104,7 +107,7 @@ Solution
 
 	https://www.mirantis.com/blog/how-to-install-cri-dockerd-and-migrate-nodes-from-dockershim
 
-Error
+Error 3
 
 	X Exiting due to RUNTIME_ENABLE: Temporary Error: sudo crictl version: exit status 1
 	
