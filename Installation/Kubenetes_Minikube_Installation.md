@@ -241,7 +241,9 @@ It will show in output
 Stop the local Minikube cluster
 ----------------------------------
 	minikube stop
-It will show in output:
+	
+It will show in output
+
 	* Stopping node "minikube"  ...
 	* 1 nodes stopped.
 
@@ -267,8 +269,11 @@ After Deleting Minikube
 
 Another Example
 ===========================================
+
 docker login
+
 username: ayazway
+
 pass:	
 Login Successful
 
