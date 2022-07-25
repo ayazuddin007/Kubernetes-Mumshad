@@ -326,6 +326,7 @@ Delete Service and Deploy
 Example
 ========
 1)
+---
 	
 	kubectl create deployment sa --image=docker.io/ayazway/sampleapp
 	
