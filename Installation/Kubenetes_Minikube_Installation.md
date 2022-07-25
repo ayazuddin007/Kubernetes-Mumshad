@@ -137,7 +137,8 @@ Let’s create a Kubernetes Deployment using an existing image named echoserver,
 
 	kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10 
 
-It will show in output:
+It will show in output
+
 	deployment.apps/hello-minikube created
 
 To check Deployment
@@ -151,10 +152,12 @@ To access the hello-minikube Deployment, expose it as a Service: (Creating a Kub
 	kubectl expose deployment hello-minikube --type=NodePort --port 8080
 The option --type=NodePort specifies the type of the Service.
 
-It will show in output:
+It will show in output
+
 	service/hello-minikube exposed
 
 To Check Service
+
 	kubectl get service
 
 	NAME             TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
