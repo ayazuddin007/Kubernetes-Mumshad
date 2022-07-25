@@ -73,7 +73,7 @@ It will show in output:
   	- sudo mv /root/.kube /root/.minikube $HOME
   	- sudo chown -R $USER $HOME/.kube $HOME/.minikube
 
-	As long as you see the message ‘Kubectl is now configured to use the cluster.’ you have successfully ran Minikube.
+	As long as you see the message â€˜Kubectl is now configured to use the cluster.â€™ you have successfully ran Minikube.
 
 
 
@@ -99,7 +99,7 @@ It will show in output:
 Running our first container (Creating a Kubernetes Deployment)
 ------------------------------------------------------------------
 Now, you can interact with your cluster using kubectl.
-Let’s create a Kubernetes Deployment using an existing image named echoserver, which is a simple HTTP server and expose it on port 8080 using --port.
+Letâ€™s create a Kubernetes Deployment using an existing image named echoserver, which is a simple HTTP server and expose it on port 8080 using --port.
 
 	kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10 
 
