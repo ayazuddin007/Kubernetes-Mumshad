@@ -10,11 +10,11 @@ Tags:		K8S-Minikube
 
 Security Group:	K8S-Minikube-SG
 
-	SSH  22  0.0.0.0/0
+	SSH  		22  		0.0.0.0/0	SSH
 	
-	Http   80  0.0.0.0/0
+	Http   		80  		0.0.0.0/0	Http
 	
-	Custom 30000 - 32767  0.0.0.0/0  NodePort Range
+	Custom TCP 	30000 - 32767   0.0.0.0/0  	NodePort Range
 	
 Key Pair:	ayzdn.pem
 
