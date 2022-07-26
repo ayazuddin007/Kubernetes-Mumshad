@@ -229,7 +229,7 @@ To Access Within the Minikube
 	http://<Minikube Private IP>:<Port>
 	http://172.31.10.73:31052
 	
-To Access Outside of Minikube(On Browser)
+To Access Outside of Minikube (On Browser)
 
 	http://<Minikube Public IP>:<Port>
 	http://65.1.248.140:31052
