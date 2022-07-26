@@ -142,6 +142,7 @@ It will show in output
 	deployment.apps/hello-minikube created
 
 To check Deployment
+
 	kubectl get deployment
 
 	NAME             READY   UP-TO-DATE   AVAILABLE   AGE
@@ -177,6 +178,7 @@ The hello-minikube Pod is now launched but you have to wait until the Pod is up 
 Check if the Pod is up and running:
 
 To Check Pod
+
 	kubectl get pod
 	
 	NAME                              READY   STATUS    RESTARTS   AGE
