@@ -36,9 +36,10 @@ Become Root user
 	
 Install Docker
 ---------------
+
 	apt-get install docker.io -y
 	docker -v
-It will show in output:
+	
 	Docker version 20.10.12, build 20.10.12-0ubuntu2~20.04.1
 
 Install Kubectl
