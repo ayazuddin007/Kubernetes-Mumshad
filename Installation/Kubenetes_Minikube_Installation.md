@@ -197,10 +197,13 @@ If the output shows the STATUS as Running, the Pod is now up and running:
 Opening the Service Exposed Port in Security Group(K8S-Minikube-SG)
 ------------------------------------------------------------------------------
 K8S-Minikube-SG
+
 	Custom TCP  31052  0.0.0.0/0
 
 Because By exectuing
+
 	kubectl get service
+	
 It will show in output:
 	
 	NAME             TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
