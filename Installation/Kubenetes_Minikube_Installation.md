@@ -2,13 +2,13 @@ Pre-Requisite
 ------------------
 AMI: Ubuntu Server 18.04 LTS (Free Tier)
 
-Instance Type	t2.medium (2 vCPU, 4GB Memory)
+Instance Type:	t2.medium (2 vCPU, 4GB Memory)
 		
-Storage		8 GB (gp2)
+Storage:	8 GB (gp2)
 
-Tags		K8S-Minikube
+Tags:		K8S-Minikube
 
-Security Group	K8S-Minikube-SG
+Security Group:	K8S-Minikube-SG
 
 	SSH  22  0.0.0.0/0
 	
@@ -16,9 +16,9 @@ Security Group	K8S-Minikube-SG
 	
 	Custom 30000 - 65535  0.0.0.0/0
 	
-Key Pair	ayzdn.pem
+Key Pair:	ayzdn.pem
 
-Note
+Note:
 
 	 An update to Minikube required a minimum of 2 vCPUs
 	 
