@@ -364,48 +364,48 @@ Example
 
 2) simple-devops-image
 
-	kubectl create deployment sa --image=docker.io/ayazway/simple-devops-image
+		kubectl create deployment sa --image=docker.io/ayazway/simple-devops-image
 	
-	kubectl get deploy
+		kubectl get deploy
 	
-	kubectl get po
+		kubectl get po
 	
-	kubectl expose deployment sa --type=NodePort --port 8080
+		kubectl expose deployment sa --type=NodePort --port 8080
 	
-	kubectl get svc
+		kubectl get svc
 	
-	minikube service sa --url
+		minikube service sa --url
 	
-	curl http://172.31.32.87:30604/webapp
+		curl http://172.31.32.87:30604/webapp
 
-	Browse: http://172.31.32.87:30604/webapp
-
-	kubectl delete svc sa
+		Browse: http://172.31.32.87:30604/webapp
 	
-	kubectl delete deploy sa
+		kubectl delete svc sa
+	
+		kubectl delete deploy sa
 	
 
 3) myimg
 
-	kubectl create deployment sa --image=docker.io/ayazway/myimg
+		kubectl create deployment sa --image=docker.io/ayazway/myimg
 	
-	kubectl get deploy
+		kubectl get deploy
 	
-	kubectl get po
+		kubectl get po
 	
-	kubectl expose deployment sa --type=NodePort --port 8080
+		kubectl expose deployment sa --type=NodePort --port 8080
 	
-	kubectl get svc
+		kubectl get svc
 	
-	minikube service sa --url
+		minikube service sa --url
 	
-	curl http://172.31.32.87:30604/webapp
+		curl http://172.31.32.87:30604/webapp
 
-	Browse: http://172.31.32.87:30604/webapp
+		Browse: http://172.31.32.87:30604/webapp
 
-	kubectl delete svc sa
+		kubectl delete svc sa
 	
-	kubectl delete deploy sa
+		kubectl delete deploy sa
 
 
 
