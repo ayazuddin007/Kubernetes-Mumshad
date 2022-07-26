@@ -338,8 +338,8 @@ Delete Service and Deploy
 Example
 ========
 
-1)
----
+1) sampleapp
+-------------
 	
 	kubectl create deployment sa --image=docker.io/ayazway/sampleapp
 	
@@ -361,8 +361,8 @@ Example
 	
 	kubectl delete deploy sa
 
-2) 
----
+2) simple-devops-image
+-----------------------
 
 	kubectl create deployment sa --image=docker.io/ayazway/simple-devops-image
 	
@@ -384,8 +384,8 @@ Example
 	
 	kubectl delete deploy sa
 
-3) 
----
+3) myimg
+---------
 
 	kubectl create deployment sa --image=docker.io/ayazway/myimg
 	
