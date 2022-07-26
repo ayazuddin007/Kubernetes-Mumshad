@@ -340,25 +340,26 @@ Example
 
 1) sampleapp
 	
-	kubectl create deployment sa --image=docker.io/ayazway/sampleapp
 	
-	kubectl get deploy
+		kubectl create deployment sa --image=docker.io/ayazway/sampleapp
 	
-	kubectl get po
+		kubectl get deploy
 	
-	kubectl expose deployment sa --type=NodePort --port 8080
+		kubectl get po
 	
-	kubectl get svc
+		kubectl expose deployment sa --type=NodePort --port 8080
 	
-	minikube service sa --url
+		kubectl get svc
 	
-	curl http://172.31.32.87:30604/sampleapp
+		minikube service sa --url
+	
+		curl http://172.31.32.87:30604/sampleapp
 
-	Browse: http://172.31.32.87:30604/sampleapp
+		Browse: http://172.31.32.87:30604/sampleapp
 
-	kubectl delete svc sa
+		kubectl delete svc sa
 	
-	kubectl delete deploy sa
+		kubectl delete deploy sa
 	
 
 2) simple-devops-image
