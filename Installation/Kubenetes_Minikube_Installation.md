@@ -14,7 +14,7 @@ Security Group:	K8S-Minikube-SG
 	
 	Http   80  0.0.0.0/0
 	
-	Custom 30000 - 32767  0.0.0.0/0		NodePort Range
+	Custom 30000 - 32767  0.0.0.0/0  NodePort Range
 	
 Key Pair:	ayzdn.pem
 
