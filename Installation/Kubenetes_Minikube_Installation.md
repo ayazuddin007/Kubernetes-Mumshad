@@ -339,7 +339,6 @@ Example
 ========
 
 1) sampleapp
--------------
 	
 	kubectl create deployment sa --image=docker.io/ayazway/sampleapp
 	
@@ -360,9 +359,9 @@ Example
 	kubectl delete svc sa
 	
 	kubectl delete deploy sa
+	
 
 2) simple-devops-image
------------------------
 
 	kubectl create deployment sa --image=docker.io/ayazway/simple-devops-image
 	
@@ -383,9 +382,9 @@ Example
 	kubectl delete svc sa
 	
 	kubectl delete deploy sa
+	
 
 3) myimg
----------
 
 	kubectl create deployment sa --image=docker.io/ayazway/myimg
 	
