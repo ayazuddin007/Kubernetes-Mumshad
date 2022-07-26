@@ -2,8 +2,7 @@ Pre-Requisite
 ------------------
 AMI: Ubuntu Server 18.04 LTS (Free Tier)
 
-Instance Type	t3.micro (2 vCPU, 1GB Memory)
-		t2.medium
+Instance Type	t2.medium (2 vCPU, 4GB Memory)
 		
 Storage		8 GB (gp2)
 
@@ -23,7 +22,7 @@ Note
 
 	 An update to Minikube required a minimum of 2 vCPUs
 	 
-	 changed the Instance Type from t2.micro (1 vCPU) to t3.micro (2 vCPU)/t2.medium
+	 changed the Instance Type from t2.micro (1 vCPU) to t2.medium (2 vCPU)
 
 
 SSH to K8S-Minikube
