@@ -158,7 +158,7 @@ The option
 
 	--type=NodePort specifies the type of the Service.
 	
-	--port defines the port
+	--port defines the exposed port.
 
 It will show in output
 
