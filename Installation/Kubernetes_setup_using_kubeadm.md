@@ -91,8 +91,8 @@ This documentation guides you in setting up a cluster with one master node and t
     ```
 1.Disable SELinux
     ```sh
-    	sudo setenforce 0
-	sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+    	 sudo setenforce 0
+	 sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
     ```
 
 3. Install Kubernetes
