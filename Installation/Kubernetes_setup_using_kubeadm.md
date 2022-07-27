@@ -89,7 +89,7 @@ This documentation guides you in setting up a cluster with one master node and t
 	exclude=kubelet kubeadm kubectl
 	EOF
     ```
-1.Disable SELinux
+2. Disable SELinux
     ```sh
     	 sudo setenforce 0
 	 sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
