@@ -25,7 +25,18 @@ This documentation guides you in setting up a cluster with one master node and t
      179 (Calico Network),
      22 (SSH)
     `  
-
+   ### `Setting Hostname`
+   On Master Node
+    ```sh
+    sudo hostnamectl set-hostname "Master"
+   ```
+   On Slave Node
+   ```sh
+    sudo hostnamectl set-hostname "Worker-1"
+    sudo hostnamectl set-hostname "Worker-2"
+   ```
+   
+   
    ### `On Master and Worker:`
 1. Perform all the commands as root user unless otherwise specified
  
