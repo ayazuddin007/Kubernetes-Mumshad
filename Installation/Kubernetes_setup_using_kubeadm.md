@@ -79,24 +79,29 @@ This documentation guides you in setting up a cluster with one master node and t
 ## Kubernetes Setup
 1. Add yum repository for kubernetes packages 
     ```sh
-    cat >>/etc/yum.repos.d/kubernetes.repo<<EOF
-    [kubernetes]
-    name=Kubernetes
-    baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-    enabled=1
-    gpgcheck=1
-    repo_gpgcheck=1
-    gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
-            https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-    EOF
+  	cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+	[kubernetes]
+	name=Kubernetes
+	baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+	enabled=1
+	gpgcheck=1
+	gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+	exclude=kubelet kubeadm kubectl
+	EOF
     ```
-1. Install Kubernetes
+1.Disable SELinux
     ```sh
-    yum install -y kubeadm-1.15.6-0.x86_64 kubelet-1.15.6-0.x86_64 kubectl-1.15.6-0.x86_64
+    	sudo setenforce 0
+	sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+    ```
+
+3. Install Kubernetes
+    ```sh
+    sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
     ```
 1. Enable and Start kubelet service
     ```sh
-    systemctl enable kubelet
+    sudo systemctl enable --now kubelet
     systemctl start kubelet
     ```
 ## `On Master Node:`
