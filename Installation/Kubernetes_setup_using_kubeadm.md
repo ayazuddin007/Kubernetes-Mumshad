@@ -93,7 +93,7 @@ This documentation guides you in setting up a cluster with one master node and t
     
 3. Install Kubernetes
     ```sh
-    sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+    yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
     ```
 1. Enable and Start kubelet service
     ```sh
